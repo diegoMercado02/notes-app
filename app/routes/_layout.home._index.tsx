@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import type { Route } from './+types/_layout.home._index';
 import { Button } from '~/components/ui/button';
 
-export async function loader({ request, params }: Route.LoaderArgs) {
+export async function loader( { request, params }: Route.LoaderArgs ) {
   return null;
 }
 
@@ -14,14 +14,14 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-6">
-          Welcome to Your Personal Notes
+            Welcome to Your Personal Notes
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-          A simple and powerful way to organize your thoughts, ideas, and tasks in one place.
+            A simple and powerful way to organize your thoughts, ideas, and tasks in one place.
           </p>
           <Link to="/notes">
             <Button className="bg-indigo-600 hover:bg-indigo-700 text-lg px-8 py-6">
-            Go to My Notes
+              Go to My Notes
             </Button>
           </Link>
         </div>
@@ -31,19 +31,19 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Create Notes</h3>
             <p className="text-gray-600">
-            Quickly create and organize your notes with our intuitive interface.
+              Quickly create and organize your notes with our intuitive interface.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Real-time Sync</h3>
             <p className="text-gray-600">
-            Your notes automatically sync across all your devices in real-time.
+              Your notes automatically sync across all your devices in real-time.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Secure Storage</h3>
             <p className="text-gray-600">
-            All your notes are securely stored and protected with end-to-end encryption.
+              All your notes are securely stored and protected with end-to-end encryption.
             </p>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
           <Link to="/notes">
             <Button className="bg-indigo-600 hover:bg-indigo-700">
-            Start Taking Notes
+              Start Taking Notes
             </Button>
           </Link>
         </div>

@@ -1,7 +1,7 @@
 import { createCookieSessionStorage, redirect } from 'react-router';
 import { supabase } from './supabase';
 
-const sessionSecret = process.env.SESSION_SECRET;
+const sessionSecret = import.meta.env.VITE_SESSION_SECRET;;
 
 if (!sessionSecret) {
   throw new Error('SESSION_SECRET must be set');
@@ -52,7 +52,7 @@ export async function requireUserId(request: Request, redirectTo: string = new U
 
 export async function logout(request: Request) {
   const session = await getUserSession(request);
-  const {error} = await supabase.auth.signOut();
+  const { error } = await supabase.auth.signOut();
   if (error) {
     return error
   }

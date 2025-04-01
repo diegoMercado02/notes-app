@@ -4,16 +4,16 @@ import { getUserSession } from '~/lib/session.server';
 import type { Route } from './+types/_layout';
 import { Button } from '~/components/ui/button';
 
-export async function loader({ request, params }: Route.LoaderArgs) {
-  const session = await getUserSession(request);
-  const userId = session.get('userId');
+export async function loader( { request, params }: Route.LoaderArgs ) {
+  const session = await getUserSession( request );
+  const userId = session.get( 'userId' );
 
   return {
     isSignedIn: !!userId
   };
 }
 
-export default function PageLayout({ loaderData }: Route.ComponentProps) {
+export default function PageLayout( { loaderData }: Route.ComponentProps ) {
 
   return (
     <div className="min-h-screen bg-gray-50">
