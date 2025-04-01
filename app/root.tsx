@@ -26,10 +26,6 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-export async function loader( { request, params }: Route.LoaderArgs ) {
-  return null;
-}
-
 export function Layout( { children }: { children: React.ReactNode } ) {
   return (
     <html lang="en">
@@ -85,7 +81,6 @@ export function ErrorBoundary( { error }: Route.ErrorBoundaryProps ) {
             </Button>
           </Link>
         </AlertDescription>
-
       </Alert>
     </main>
   );

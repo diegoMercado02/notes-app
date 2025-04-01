@@ -1,9 +1,5 @@
-import { useLoaderData } from 'react-router';
-import { redirect } from 'react-router';
 import type { Route } from './+types/_layout.notes._index';
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { getUserSession } from '~/lib/session.server';
-import { supabase } from '~/lib/supabase';
 import { z } from 'zod'
 import { zx } from 'zodix'
 import {
@@ -20,28 +16,16 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Label } from "~/components/ui/label";
 import { Button } from '~/components/ui/button';
-import type { ComponentProps } from 'react';
 import { createClient } from '~/lib/supabase/supabaseServer';
 
 
 export async function loader( { request }: Route.LoaderArgs ) {
   const { supabase } = createClient( request )
 
-  const { data: { user }, } = await supabase.auth.getUser()
-
   try {
-    const session = await getUserSession( request );
-    const userId = session.get( 'userId' );
-
-    if ( !userId ) {
-      return redirect( '/login' );
-    }
-
-    const { data: notes, error } = await supabase
+    const { data: notes } = await supabase
       .from( 'notes' )
       .select( '*' )
-
-    if ( error ) throw error;
 
     return { notes: notes || [] };
   } catch ( error ) {
@@ -59,23 +43,21 @@ const createNoteSchema = z.object( {
 
 // Action to handle form submission
 export async function action( { request }: Route.ActionArgs ) {
-  const supabase = createClient( request );
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
-    console.log( session );
-    if ( !session?.user ) {
-      return redirect( '/login' );
-    }
+  const formData = await zx.parseForm( request, createNoteSchema );
+  const { supabase } = createClient( request );
+  const { data: { session } } = await supabase.auth.getSession();
+  console.log( session );
+  console.log( formData );
 
-    const formData = await zx.parseForm( request, createNoteSchema );
-    console.log( formData );
+
+  try {
     await supabase
       .from( 'notes' )
       .insert( [
         {
           title: formData.title,
           content: formData.content,
-          user_id: session.user.id
+          user_id: session?.user.id
         }
       ] )
       .select();

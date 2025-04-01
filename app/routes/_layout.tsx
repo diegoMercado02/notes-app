@@ -1,10 +1,9 @@
-import { Outlet, useLoaderData, Link, Form } from 'react-router';
-import { supabase } from '~/lib/supabase';
+import { Outlet, Link } from 'react-router';
 import { getUserSession } from '~/lib/session.server';
 import type { Route } from './+types/_layout';
 import { Button } from '~/components/ui/button';
 
-export async function loader( { request, params }: Route.LoaderArgs ) {
+export async function loader( { request }: Route.LoaderArgs ) {
   const session = await getUserSession( request );
   const userId = session.get( 'userId' );
 

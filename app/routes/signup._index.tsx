@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase';
+import { createClient } from '../lib/supabase/supabaseServer';
 import { redirect } from 'react-router';
 import type { Route } from './+types/login._index';
 import { createUserSession, getUserSession } from '~/lib/session.server';
@@ -9,15 +9,15 @@ import { SignupForm } from '~/components/signup-form';
 export async function loader( { request }: Route.LoaderArgs ) {
     const session = await getUserSession( request )
     const userId = session.get( 'userId' );
-    
+
     if ( userId ) {
         return redirect( '/' );
     }
 
     return null
 }
-  
-  
+
+
 const formDataSchema = z.object( {
     email: z.string(),
     password: z.string(),
@@ -26,19 +26,20 @@ const formDataSchema = z.object( {
 
 export async function action( { request }: Route.ActionArgs ) {
     const formData = await zx.parseForm( request, formDataSchema );
+    const { supabase } = createClient( request );
+
     try {
-        const { data, error } = await supabase.auth.signUp( {
+        const { data } = await supabase.auth.signUp( {
             email: formData.email,
             password: formData.password,
         } );
-                
+
         if ( data.session ) {
             return createUserSession( data.session.access_token, '/' );
         }
-        
+
         return { error: 'No session created' };
     } catch ( error ) {
-        console.log( error )
         return { error: error instanceof Error ? error.message : 'An error occurred' };
     }
 }

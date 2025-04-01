@@ -1,9 +1,9 @@
 import { redirect } from "react-router";
-import { supabase } from "~/lib/supabase";
+import { createClient } from "~/lib/supabase/supabaseServer";
 import type { Route } from "./+types/signout.index";
 
-export async function loader( { request, params }: Route.LoaderArgs ) {
-
+export async function loader( { request }: Route.LoaderArgs ) {
+    const { supabase } = createClient( request )
     await supabase.auth.signOut()
 
     return redirect( '/home' )

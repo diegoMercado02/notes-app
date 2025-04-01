@@ -1,10 +1,5 @@
 import { Link } from 'react-router';
-import type { Route } from './+types/_layout.home._index';
 import { Button } from '~/components/ui/button';
-
-export async function loader( { request, params }: Route.LoaderArgs ) {
-  return null;
-}
 
 export default function Home() {
 
