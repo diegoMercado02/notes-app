@@ -15,11 +15,11 @@ export default defineConfig([
     files: ["**/*.{jsx,tsx}"],
     rules: {
       "react/react-in-jsx-scope": "off", // Disable the rule
+      "space-in-parens": ["error", "always"], // Enforce spaces inside parentheses
       "react/jsx-uses-react": "off",    // Disable the rule for React 17+
-      "react/jsx-indent": ["warn", 2], // Enforce 2-space indentation for JSX
-      "react/jsx-indent-props": ["warn", 2], // Enforce 2-space indentation for JSX props
-      "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }], // Warn on unused variables, ignore those prefixed with "_"
-      "no-unused-imports/no-unused-imports": "warn" // Warn on unused imports
+      "react/jsx-indent": ["error", 2], // Enforce 2-space indentation for JSX
+      "react/jsx-indent-props": ["error", 2], // Enforce 2-space indentation for JSX props
+      "no-multiple-empty-lines": ["error", { "max": 2 }], // Allow at most 2 empty lines
     },
   },
 ]);
