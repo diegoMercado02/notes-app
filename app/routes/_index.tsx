@@ -1,15 +1,18 @@
 import { redirect } from "react-router";
-import type { Route } from "./+types/_index";
+import { createClient } from "~/lib/supabase/server";
 
-export async function loader( { request, params }: Route.LoaderArgs ) {
-    return redirect( '/home' );
+export async function loader( request: Request ) {
+    try {
+      const { supabase } = createClient( request );
+      const userResponse = await supabase.auth.getUser();
+
+      if ( !userResponse?.data?.user ) {
+        throw redirect( '/login' );
+      } else {
+        throw redirect( '/home' );
+      }
+    } catch ( error ) {
+        console.error( error );
+        return redirect( '/login' );
+      }
   }
-
-  export async function action( { request }: Route.ActionArgs ) {
-    // Get the form data
-    const formData = await request.formData();
-    console.log( formData )
-    // Handle the form submission
-    // For now, just redirect to the login page
-    return redirect( '/login' );
-}
