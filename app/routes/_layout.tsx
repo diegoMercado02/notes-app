@@ -9,7 +9,7 @@ export async function loader( { request }: Route.LoaderArgs ) {
   const isSignedIn = session.data.session !== undefined;
 
   return {
-      isSignedIn: isSignedIn,
+    isSignedIn: isSignedIn,
   };
 }
 
@@ -20,20 +20,28 @@ export default function PageLayout( { loaderData }: Route.ComponentProps ) {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <nav className="flex justify-between items-center container">
-            <Link to="/home" className="text-2xl font-bold text-gray-900 hover:text-indigo-600">
+            <Link
+              to="/home"
+              className="text-2xl font-bold text-gray-900 hover:text-indigo-600">
               Notes App
             </Link>
             <div className="flex items-center space-x-6">
               {loaderData.isSignedIn ? (
                 <>
-                  <Link to="/notes" className="text-gray-700 hover:text-indigo-600">
+                  <Link
+                    to="/notes"
+                    className="text-gray-700 hover:text-indigo-600">
                     Notes
                   </Link>
-                  <Link to="/profile" className="text-gray-700 hover:text-indigo-600">
+                  <Link
+                    to="/profile"
+                    className="text-gray-700 hover:text-indigo-600">
                     Profile
                   </Link>
                   <Link to="/logout">
-                    <Button variant="outline" className="text-red-600 border-red-600 hover:bg-red-50">
+                    <Button
+                      variant="outline"
+                      className="text-red-600 border-red-600 hover:bg-red-50">
                       Log Out
                     </Button>
                   </Link>
@@ -41,7 +49,9 @@ export default function PageLayout( { loaderData }: Route.ComponentProps ) {
               ) : (
                 <>
                   <Link to="/login">
-                    <Button variant="ghost" className="hover:text-indigo-600">
+                    <Button
+                      variant="ghost"
+                      className="hover:text-indigo-600">
                       Sign In
                     </Button>
                   </Link>

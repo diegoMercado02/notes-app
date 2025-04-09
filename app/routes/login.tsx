@@ -72,16 +72,25 @@ export default function Login() {
                         Forgot your password?
                       </Link>
                     </div>
-                    <Input id="password" type="password" name="password" required />
+                    <Input
+                      id="password"
+                      type="password"
+                      name="password"
+                      required />
                   </div>
                   {error && <p className="text-sm text-red-500">{error}</p>}
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={ loading }>
                     {loading ? 'Logging in...' : 'Login'}
                   </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
                   Don&apos;t have an account?{' '}
-                  <Link to="/sign-up" className="underline underline-offset-4">
+                  <Link
+                    to="/sign-up"
+                    className="underline underline-offset-4">
                     Sign up
                   </Link>
                 </div>

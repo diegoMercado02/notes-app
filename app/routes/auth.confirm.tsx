@@ -22,5 +22,5 @@ export async function loader( { request }: LoaderFunctionArgs ) {
   }
 
   // redirect the user to an error page with some instructions
-  return redirect( `/auth/error?error=No token hash or type` )
+  return redirect( '/auth/error?error=No token hash or type' )
 }

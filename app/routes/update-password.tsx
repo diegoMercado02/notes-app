@@ -61,7 +61,10 @@ export default function Page() {
                     />
                   </div>
                   {error && <p className="text-sm text-red-500">{error}</p>}
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={ loading }>
                     {loading ? 'Saving...' : 'Save new password'}
                   </Button>
                 </div>
